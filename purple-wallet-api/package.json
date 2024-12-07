@@ -1,0 +1,35 @@
+{
+  "name": "purple-wallet-api",
+  "version": "1.0.0",
+  "description": "REST API for a Digital Wallet",
+  "main": "server.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --transpile-only src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deyvidsalvatore/PurpleWallet.git"
+  },
+  "keywords": [
+    "wallet",
+    "api",
+    "digital"
+  ],
+  "author": "Deyvid Santos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deyvidsalvatore/PurpleWallet/issues"
+  },
+  "homepage": "https://github.com/deyvidsalvatore/PurpleWallet#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  }
+}
