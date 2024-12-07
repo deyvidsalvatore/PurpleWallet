@@ -4,8 +4,9 @@
   "description": "REST API for a Digital Wallet",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev --transpile-only src/server.ts"
+    "start": "ts-node src/app/server.ts",
+    "dev": "ts-node-dev --transpile-only src/app/server.ts",
+    "test": "jest --watch --config jest.config.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,17 @@
   },
   "homepage": "https://github.com/deyvidsalvatore/PurpleWallet#readme",
   "dependencies": {
-    "express": "^4.21.2",
-    "ts-node": "^10.9.2"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.2"
   }
