@@ -1,14 +1,24 @@
-import { SignUpRequest } from "../dtos/sign-up.request";
-import bcrypt from "bcrypt";
 import { AuthRepository } from "../repositories/auth.repository";
+import bcrypt from "bcrypt";
 
 export class AuthService {
-  
   private authRepository = new AuthRepository();
+
+  async signUp(data: any) {
+    try {
+      const userExists = await this.authRepository.findByEmail(data.email);
+
+      if (userExists) {
+        return { error: "Email already registered" };
+      }
   
-  signUp(request: SignUpRequest) {
-    const hasPassword = bcrypt.hashSync(request.password, 10);
-    const result = this.authRepository.create({...request, password: hasPassword});
-    return { message: "Usuário cadastrado com sucesso!", user: result };
+      const hashedPassword = await bcrypt.hash(data.password, 10);
+
+      await this.authRepository.create({ ...data, password: hashedPassword });
+      return { message: "User created successfully" };
+    } catch (error) {
+      console.error("Error during sign up:", error);
+      return { error: "Failed to process request" };
+    }
   }
 }
