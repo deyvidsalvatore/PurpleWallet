@@ -13,5 +13,6 @@ export class AuthRoutes {
 
   private async initializeRoutes() {
     this.router.post("/signup", this.authController.signUp);
+    this.router.post("/signin", this.authController.signIn);
   }
 }

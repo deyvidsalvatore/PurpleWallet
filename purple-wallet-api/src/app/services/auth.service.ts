@@ -11,7 +11,7 @@ export class AuthService {
       if (userExists) {
         return { error: "Email already registered" };
       }
-  
+
       const hashedPassword = await bcrypt.hash(data.password, 10);
 
       await this.authRepository.create({ ...data, password: hashedPassword });
@@ -19,6 +19,33 @@ export class AuthService {
     } catch (error) {
       console.error("Error during sign up:", error);
       return { error: "Failed to process request" };
+    }
+  }
+
+  async signIn(data: any) {
+    try {
+      const user = await this.authRepository.findByEmail(data.email);
+
+      if (!user) {
+        return { error: "Email not found" };
+      }
+
+      const passwordOk = bcrypt.compareSync(data.password, user.password);
+
+      if (!passwordOk) {
+        return { error: "Incorrect password" };
+      }
+
+      const token = await this.authRepository.generateToken(user.id);
+
+      if (!token) {
+        return { error: "Failed to generate a valid token" };
+      }
+
+      return { token };
+    } catch (error) {
+      console.error("Error during sign in:", error);
+      return { error: "Failed to process sign in" };
     }
   }
 }
