@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --transpile-only src/index.ts",
-    "test": "jest --watch --config jest.config.js"
+    "test": "jest --watch --detectOpenHandles --config jest.config.js"
   },
   "repository": {
     "type": "git",
