@@ -2,8 +2,6 @@ import UserSchema from "../models/user.model";
 import 'dotenv/config';
 import jwt from "jsonwebtoken";
 
-const SECRET_KEY = process.env.SECRET_KEY || '';
-
 export class AuthRepository {
 
   async create(data: any) {

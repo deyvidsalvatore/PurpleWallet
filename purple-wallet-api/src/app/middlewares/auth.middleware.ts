@@ -23,7 +23,8 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
       res.status(401).json({ error: "Invalid token payload;" });
     }
 
-    req.id = decodedToken.sub;
+    req.user = { sub: decodedToken.sub };
+    
     next();
   } catch (error) {
     console.error("Error verifying token:", error);
