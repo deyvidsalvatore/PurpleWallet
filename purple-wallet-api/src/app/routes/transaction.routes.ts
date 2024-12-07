@@ -11,6 +11,7 @@ export class TransactionRoutes {
     this.initializeRoutes();
   }
   private async initializeRoutes() {
-    this.router.get('', isAuthenticated, this.transactionController.create);
+    this.router.post('', isAuthenticated, this.transactionController.create);
+    this.router.get('', isAuthenticated, this.transactionController.findAllByUser);
   }
 }
