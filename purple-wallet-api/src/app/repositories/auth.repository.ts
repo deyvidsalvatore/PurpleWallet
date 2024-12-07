@@ -15,7 +15,9 @@ export class AuthRepository {
     return await UserSchema.findOne({ email });
   }
 
-  async generateToken(id: string) {
-    return jwt.sign({ id }, SECRET_KEY, { expiresIn: 3600000});
+  async generateToken(userId: string) {
+    return jwt.sign({ sub: userId }, process.env.SECRET_KEY as string, {
+      expiresIn: '1h',
+    });
   }
 }
