@@ -3,6 +3,7 @@ import { AuthGuard } from './guards/AuthGuard.tsx';
 import { SignIn } from './pages/SignIn.tsx';
 import { SignUp } from './pages/SignUp.tsx';
 import { Home } from './pages/Home.tsx';
+import { TransactionForm } from './components/TransactionForm.tsx';
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
           element={
             <AuthGuard>
               <Home />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/transaction/:type"
+          element={
+            <AuthGuard>
+              <TransactionForm />
             </AuthGuard>
           }
         />
