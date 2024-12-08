@@ -48,4 +48,19 @@ export class AuthService {
       return { error: "Failed to process sign in" };
     }
   }
+
+  async getLoggedUser(userId: string) {
+    try {
+      const user = await this.authRepository.findById(userId);
+
+      if (!user) {
+        return { error: "User not found" };
+      }
+
+      return { user };
+    } catch (error) {
+      console.error("Error fetching logged user data:", error);
+      return { error: "Failed to fetch user data" };
+    }
+  }
 }

@@ -39,4 +39,20 @@ export class AuthController {
         res.status(500).json({ error: "Internal Server Error" });
       });
   }
+
+  authLogged(req: Request, res: Response) {
+    const { sub } = req.user!;
+
+    authService.getLoggedUser(sub)
+      .then(result => {
+        if (result.error) {
+          return res.status(404).json({ error: result.error });
+        }
+
+        res.status(200).json({ user: result.user });
+      })
+      .catch(() => {
+        res.status(500).json({ error: "Unexpected server error" });
+      });
+  }
 }

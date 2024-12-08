@@ -18,4 +18,10 @@ export class AuthRepository {
       expiresIn: '1h',
     });
   }
+
+  async findById(id: string) {
+    const user = await UserSchema.findById(id);
+    return user;
+  }
+  
 }
