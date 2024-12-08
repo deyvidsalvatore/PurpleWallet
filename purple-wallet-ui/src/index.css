@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+button[type="submit"],
+button {
+  background: linear-gradient(130deg, #9b5fff, #6a0dad);
+}
