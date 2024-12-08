@@ -6,9 +6,8 @@ import { connectDB } from "./config/database";
 import { TransactionRoutes } from "./routes/transaction.routes";
 
 const FRONTEND_ORIGINS = process.env.FRONTEND_ORIGINS
-  ? process.env.FRONTEND_ORIGINS.split(",")
+  ? process.env.FRONTEND_ORIGINS.split(',')
   : ["*"];
-
 const app: Express = express();
 
 connectDB();

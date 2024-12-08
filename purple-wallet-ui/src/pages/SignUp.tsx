@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Alert } from '../components/Alert';
+import { signUp } from '../services/AuthService';
 
 export const SignUp = () => {
   const [fullName, setFullName] = useState('');
@@ -10,6 +12,9 @@ export const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const [alert, setAlert] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isValidForm =
@@ -22,17 +27,33 @@ export const SignUp = () => {
     setIsFormValid(isValidForm);
   }, [fullName, email, password, confirmPassword]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Full Name:', fullName);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-    alert('Form submitted successfully!');
+
+    try {
+      await signUp(fullName, email, password);
+      setAlert({ message: 'Cadastrado com sucesso!', type: 'success' });
+      setTimeout(() => {
+        navigate('/signin');
+      }, 1000);
+    } catch (error) {
+      setAlert({ message: 'Erro ao realizar o cadastro.', type: 'error' });
+    }
+  };
+
+  const closeAlert = () => {
+    setAlert(null);
   };
 
   return (
     <div className="flex flex-col items-center justify-around bg-zinc-900 rounded p-8 w-[35rem] h-[35rem]">
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={closeAlert}
+        />
+      )}
       <Logo />
       <form
         className="flex flex-col justify-center gap-4 w-full text-2xl"
@@ -70,7 +91,7 @@ export const SignUp = () => {
         <Button
           text="Sign Up"
           disabled={!isFormValid}
-          onClick={handleSubmit}
+          type="submit"
         />
       </form>
       <p className="mt-4 text-white text-lg">
