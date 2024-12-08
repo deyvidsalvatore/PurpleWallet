@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 export const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const isValid = email.trim() !== '' && password.trim() !== '';
+    setIsFormValid(isValid);
+  }, [email, password]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,13 +31,15 @@ export const SignIn = () => {
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <InputField
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <Button onClick={() => {}} text="Sign In" />
+        <Button text="Sign In" disabled={!isFormValid} />
       </form>
       <p className='text-white text-2xl'>Don't have an account? 
         <Link to="/signup">

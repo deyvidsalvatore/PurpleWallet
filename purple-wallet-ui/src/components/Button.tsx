@@ -1,13 +1,20 @@
-// Button.tsx
 import React from 'react';
 
 interface ButtonProps {
-  onClick: () => void;
+  onClick?: (e: React.FormEvent) => void;
+  type?: 'button' | 'submit' | 'reset';
   text: string;
   size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ onClick, text, size = 'md' }) => {
+export const Button: React.FC<ButtonProps> = ({
+  onClick,
+  type = 'submit',
+  text,
+  size = 'md',
+  disabled = false,
+}) => {
   const sizeClasses = {
     sm: 'px-2 py-1 text-lg',
     md: 'px-4 py-2 text-2xl',
@@ -16,8 +23,12 @@ export const Button: React.FC<ButtonProps> = ({ onClick, text, size = 'md' }) =>
 
   return (
     <button
+      type={type}
       onClick={onClick}
-      className={`rounded w-full font-bold text-white bg-purple-600 hover:bg-purple-700 transition duration-200 ${sizeClasses[size]}`}
+      disabled={disabled}
+      className={`rounded w-full font-bold text-white bg-purple-600 hover:bg-purple-700 transition duration-200 ${sizeClasses[size]} ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
     >
       {text}
     </button>
