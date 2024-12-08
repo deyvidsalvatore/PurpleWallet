@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
+import { Link } from 'react-router-dom';
 
 export const SignUp = () => {
   const [fullName, setFullName] = useState('');
@@ -46,7 +47,11 @@ export const SignUp = () => {
         />
         <Button onClick={() => {}} text="Sign Up" />
       </form>
-      <p className='text-white text-2xl'>Already have an account? Login here</p>
+      <p className='text-white text-2xl'>Already have an account? 
+        <Link to="/signin">
+          <span className='ml-1 text-purple-500 hover:text-sky-500'>Login here</span>
+        </Link>
+      </p>
     </div>
   );
 };

@@ -1,14 +1,9 @@
-import './App.css'
-import { SignIn } from './pages/SignIn';
+import { Outlet } from 'react-router-dom';
+import './App.css';
+
 function App() {
 
-  return (
-    <>
-      <main className='flex items-center justify-center h-screen'>
-        <SignIn/>
-      </main>
-    </>
-  );
+  return <Outlet />;
 }
 
 export default App;

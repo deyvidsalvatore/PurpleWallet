@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
+import { Link } from 'react-router-dom';
 
 export const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -32,7 +33,11 @@ export const SignIn = () => {
         />
         <Button onClick={() => {}} text="Sign In" />
       </form>
-      <p className='text-white text-2xl'>Don't have an account? Register here</p>
+      <p className='text-white text-2xl'>Don't have an account? 
+        <Link to="/signup">
+        <span className='ml-1 text-purple-500 hover:text-sky-500'>Register here</span>
+        </Link>
+      </p>
     </div>
   );
 };
